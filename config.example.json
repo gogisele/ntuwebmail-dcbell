@@ -1,0 +1,7 @@
+{
+  "host": "msa.ntu.edu.tw",
+  "username": "YOUR_STUDENT_ID",
+  "password": "REPLACE_WITH_MAIL_PASSWORD",
+  "webhook": "https://discord.com/api/webhooks/REPLACE_ME",
+  "interval": 60
+}

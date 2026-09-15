@@ -1,0 +1,21 @@
+services:
+  notifier:
+    build: .
+    command: ["python", "pop_notifier.py"]
+    restart: unless-stopped
+    cpus: 0.1
+    mem_limit: 128m
+    pids_limit: 32
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - state:/data
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '2'
+volumes:
+  state:
