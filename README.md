@@ -1,6 +1,6 @@
 # NTU WebMail Discord Notifier
 
-Send new NTU WebMail message headers to a private Discord channel. The default mode uses the student-ID POP3 service at `msa.ntu.edu.tw:995`. It checks once per minute, reads headers without downloading attachments, and never deletes server mail. On the first run, it skips existing messages. Later runs use POP3 UIDL to avoid duplicate notifications. The program uses only the Python standard library and does not need a GPU.
+Send new NTU WebMail notifications to a private Discord channel. The default mode uses the student-ID POP3 service at `msa.ntu.edu.tw:995`. It checks once per minute, includes sender, subject, date, and a shortened plain-text body preview, and never deletes server mail. Messages from `cool.ntu.edu.tw` are labeled as NTU COOL mail; all other messages are labeled as NTU WebMail. On the first run, it skips existing messages. Later runs use POP3 UIDL to avoid duplicate notifications. The program uses only the Python standard library and does not need a GPU.
 
 NTU Exchange Mail and NTU WebMail are different services. These instructions are for student-ID WebMail accounts. `notifier.py` also contains an IMAP mode for Exchange Mail, which has different server settings; confirm those settings in NTU's official documentation before using it.
 
@@ -62,7 +62,7 @@ If Docker Compose is available, you can instead run `docker compose build`, `doc
 - POP3 sees only mail available through that service. Mailbox rules or folder settings may change what it sees.
 - After downtime, it reports new messages still present in the POP3 mailbox.
 - A successful Discord send followed by a crash before UIDL state is saved can result in a duplicate notification.
-- Never publish `config.json`, `state/`, logs, or PID files. Sender, subject, and date are sent to Discord, so use a private channel.
+- Never publish `config.json`, `state/`, logs, or PID files. Sender, subject, date, and a body preview are sent to Discord, so use a private channel.
 - A host administrator with root access can obtain credentials used by the running process. Use a device you control if that trust boundary is unacceptable.
 
 Official references: [NTU Mail services and WebMail POP3 settings](https://ntumail.cc.ntu.edu.tw/ntumailfaq/) and [Discord Incoming Webhooks](https://docs.discord.com/developers/resources/webhook).
